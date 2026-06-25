@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/types_file.xsd">
+    <type id="urban_mixed_2lane"
+          priority="1"
+          numLanes="2"
+          speed="13.89"
+          allow="passenger bicycle"/>
+</types>

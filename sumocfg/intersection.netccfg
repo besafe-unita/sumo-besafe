@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+    <input>
+        <node-files value="intersection.nod.xml"/>
+        <edge-files value="intersection.edg.xml"/>
+        <type-files value="intersection.typ.xml"/>
+    </input>
+    <output>
+        <output-file value="intersection.net.xml"/>
+    </output>
+    <processing>
+        <no-turnarounds value="true"/>
+    </processing>
+    <tls_building>
+        <tls.guess-signals value="true"/>
+        <tls.default-type value="static"/>
+    </tls_building>
+    <report>
+        <no-warnings value="false"/>
+    </report>
+</configuration>

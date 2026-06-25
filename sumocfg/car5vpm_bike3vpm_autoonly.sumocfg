@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+    <input>
+        <net-file value="intersection.net.xml"/>
+        <route-files value="car5vpm_bike3vpm_autoonly.rou.xml"/>
+        <additional-files value="vtypes.add.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+        <step-length value="0.1"/>
+    </time>
+
+    <processing>
+        <lateral-resolution value="0.8"/>
+        <collision.action value="teleport"/>
+        <collision.stoptime value="0"/>
+        <collision.check-junctions value="true"/>
+    </processing>
+
+    <output>
+        <output.column-header value="plain"/>
+        <tripinfo-output value="../results/car5vpm_bike3vpm_autoonly_tripinfo.csv"/>
+        <tripinfo-output.write-unfinished value="true"/>
+        <tripinfo-output.write-undeparted value="true"/>
+        <statistic-output value="../results/car5vpm_bike3vpm_autoonly_stats.xml"/>
+        <summary-output value="../results/car5vpm_bike3vpm_autoonly_summary.csv"/>
+        <collision-output value="../results/car5vpm_bike3vpm_autoonly_collision.csv"/>
+    </output>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <gui_only>
+        <start value="true"/>
+        <gui-settings-file value="gui.xml"/>
+    </gui_only>
+</sumoConfiguration>
