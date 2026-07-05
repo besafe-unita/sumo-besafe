@@ -208,15 +208,15 @@ def summarize(df: pd.DataFrame) -> pd.DataFrame:
 
 def plot_counts(summary: pd.DataFrame) -> None:
     metrics = [
-        ("bike_crossing_conflicts", "Bicycle crossing conflicts"),
-        ("bike_crossing_ttc_le_1_5", "Crossing TTC <= 1.5 s"),
-        ("bike_crossing_drac_ge_3_0", "Crossing DRAC >= 3 m/s^2"),
-        ("bike_crossing_pet_le_2_0", "Crossing PET <= 2 s"),
+        ("bike_crossing_conflicts", "Crossing conflicts"),
+        ("bike_crossing_ttc_le_1_5", "TTC <= 1.5 s"),
+        ("bike_crossing_drac_ge_3_0", "DRAC >= 3 m/s^2"),
+        ("bike_crossing_pet_le_2_0", "PET <= 2 s"),
     ]
 
     x = np.arange(len(metrics))
     width = 0.25
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(8, 4))
     fig.suptitle(
         "SSM indicators for bicycle-involved crossing conflicts",
         fontsize=13,

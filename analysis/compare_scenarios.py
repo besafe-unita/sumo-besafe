@@ -198,7 +198,7 @@ VCLASS_TITLES = {"car": "Cars", "bicycle": "Bicycles"}
 
 def plot_distributions(dfs: dict) -> None:
     for vclass, metrics in METRICS_CONFIG.items():
-        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        fig, axes = plt.subplots(2, 2, figsize=(10, 6))
         fig.suptitle(
             f"Trip metric distributions - {VCLASS_TITLES[vclass]}\n"
             "Scenario comparison",
@@ -255,7 +255,7 @@ def plot_distributions(dfs: dict) -> None:
 
             y0, y1 = ax.get_ylim()
             ax.set_ylim(y0 - (y1 - y0) * 0.18, y1)
-            annotate_stats(ax, positions, data_by_scenario)
+            # annotate_stats(ax, positions, data_by_scenario)
 
         plt.tight_layout()
         save_figure(fig, f"distributions_{vclass}.pdf")
@@ -269,7 +269,7 @@ def plot_ecdf(dfs: dict) -> None:
         ("speed_ms", "Average speed (m/s)"),
     ]
 
-    fig, axes = plt.subplots(2, 2, figsize=(13, 9))
+    fig, axes = plt.subplots(2, 2, figsize=(10, 6))
     fig.suptitle("ECDF - Bicycles by scenario", fontsize=13, fontweight="bold")
     axes = axes.flatten()
 
@@ -313,7 +313,7 @@ def plot_safety_indicators(stats_dict: dict, collision_counts: dict) -> None:
     x = np.arange(len(indicator_labels))
     width = 0.25
 
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(8, 4))
     fig.suptitle("Safety indicators and collision diagnostics", fontsize=13, fontweight="bold")
 
     for i, sc in enumerate(SCENARIO_KEYS):
@@ -347,17 +347,6 @@ def plot_safety_indicators(stats_dict: dict, collision_counts: dict) -> None:
     ax.set_xticklabels(indicator_labels, fontsize=10)
     ax.set_ylabel("Count", fontsize=10)
     ax.legend(fontsize=9)
-    ax.text(
-        0.0,
-        -0.18,
-        "Note: bicycle-involved collisions are counted from SUMO collision-output. "
-        "Emergency braking is the aggregate SUMO safety counter across all vehicles.",
-        transform=ax.transAxes,
-        ha="left",
-        va="top",
-        fontsize=8,
-        color="dimgray",
-    )
     ax.grid(axis="y", alpha=0.3, linestyle="--")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -366,17 +355,12 @@ def plot_safety_indicators(stats_dict: dict, collision_counts: dict) -> None:
     save_figure(fig, "safety_indicators.pdf")
 
 
-def plot_aggregate_stats(stats_dict: dict) -> None:
-    aggregate_metrics = [
-        ("speed", "Average speed (m/s)"),
-        ("duration", "Average duration (s)"),
-        ("waitingTime", "Average waiting time (s)"),
-        ("timeLoss", "Average time loss (s)"),
-    ]
+def plot_aggregate_stats(stats_dict: dict, aggregate_metrics, nick) -> None:
+    
 
-    fig, axes = plt.subplots(2, 4, figsize=(18, 8))
+    fig, axes = plt.subplots(2, 2, figsize=(12, 6))
     fig.suptitle(
-        "Aggregate metrics from SUMO statistics XML\nCars (top row) and bicycles (bottom row)",
+        f"Aggregate metrics ({nick}) from SUMO statistics XML\nCars (top row) and bicycles (bottom row)",
         fontsize=12,
         fontweight="bold",
     )
@@ -423,7 +407,7 @@ def plot_aggregate_stats(stats_dict: dict) -> None:
             ax.spines["right"].set_visible(False)
 
     plt.tight_layout()
-    save_figure(fig, "aggregate_stats.pdf")
+    save_figure(fig, f"aggregate_stats_{nick}.pdf")
 
 
 def statistical_tests(dfs: dict) -> pd.DataFrame:
@@ -534,7 +518,21 @@ def main() -> None:
     plot_safety_indicators(stats_dict, collision_counts)
 
     print("[6/6] Plotting aggregate statistics...")
-    plot_aggregate_stats(stats_dict)
+    
+    aggregate_metrics = [
+        ("speed", "Average speed (m/s)"),
+        ("duration", "Average duration (s)"),
+    ]
+    plot_aggregate_stats(stats_dict, aggregate_metrics, "speed_duration")
+
+
+    aggregate_metrics = [
+        ("waitingTime", "Average waiting time (s)"),
+        ("timeLoss", "Average time loss (s)"),
+    ]
+    plot_aggregate_stats(stats_dict, aggregate_metrics, "waiting_timeLoss")
+
+
 
     statistical_tests(dfs)
 
