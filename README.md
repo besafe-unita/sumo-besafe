@@ -5,7 +5,7 @@ Minimal SUMO scenario for quickly reproducing and comparing mixed car/bicycle tr
 ## Requirements
 
 - Python 3
-- Eclipse SUMO, with `sumo`, `sumo-gui` and `netconvert` available in `PATH`
+- Eclipse SUMO (v1.26 +), with `sumo`, `sumo-gui` and `netconvert` available in `PATH`
 
 Check the SUMO installation with:
 
